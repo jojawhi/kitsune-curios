@@ -1,13 +1,18 @@
 import './nav.styles.scss';
 //Fragment does not render, useful for satisfying single parent element return requirment
-import { Fragment } from 'react';
+import { Fragment, useContext } from 'react';
 import { Outlet, Link } from 'react-router-dom';
-//import Logo from '../../components/logo/logo.component';
 import { ReactComponent as FoxLogo } from '../../assets/logo.svg';
+import { UserContext } from '../../contexts/user.context';
+import { signOutUser } from '../../utils/firebase/firebase.utils';
 
 //import NavLink from '../../components/nav-link/nav-link.component';
 
 const Nav = () => {
+	const { currentUser } = useContext(UserContext);
+
+	//console.log(currentUser);
+
 	return (
 		<Fragment>
 			<div className='nav'>
@@ -23,9 +28,15 @@ const Nav = () => {
 					<Link className='nav-link' to='shop'>
 						SHOP
 					</Link>
-					<Link className='nav-link' to='auth'>
-						SIGN IN
-					</Link>
+					{currentUser ? (
+						<span className='nav-link' onClick={signOutUser}>
+							SIGN OUT
+						</span>
+					) : (
+						<Link className='nav-link' to='auth'>
+							SIGN IN
+						</Link>
+					)}
 				</div>
 			</div>
 			<Outlet />
