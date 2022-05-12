@@ -1,0 +1,33 @@
+.checkout-item-container {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	padding: 1rem 0;
+	text-align: center;
+	border-bottom: 1px solid gray;
+}
+
+.checkout-img {
+	place-self: center;
+	width: 7rem;
+}
+
+.quantity-container {
+	display: flex;
+	align-items: center;
+	place-self: center;
+}
+
+.quantity {
+	padding: 0 0.5rem;
+}
+
+.arrow,
+.close-button {
+	padding: 0 0.25rem;
+	font-size: 1.5rem;
+	font-weight: 900;
+	cursor: pointer;
+}
