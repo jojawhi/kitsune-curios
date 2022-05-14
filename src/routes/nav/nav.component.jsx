@@ -4,7 +4,7 @@ import { Fragment, useContext } from 'react';
 import { Outlet, Link } from 'react-router-dom';
 import { ReactComponent as FoxLogo } from '../../assets/logo.svg';
 import { UserContext } from '../../contexts/user.context';
-import { DropdownContext } from '../../contexts/dropdown.context';
+import { CartContext } from '../../contexts/cart.context';
 import { signOutUser } from '../../utils/firebase/firebase.utils';
 import CartIcon from '../../components/cart-icon/cart-icon.component';
 import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component';
@@ -13,7 +13,7 @@ import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component
 
 const Nav = () => {
 	const { currentUser } = useContext(UserContext);
-	const { isOpen } = useContext(DropdownContext);
+	const { isOpen } = useContext(CartContext);
 
 	//console.log(currentUser);
 

@@ -1,31 +1,40 @@
 import './checkout-item.styles.scss';
+import { useContext } from 'react';
+import { CartContext } from '../../contexts/cart.context';
 
 const CheckoutItem = ({ cartItem }) => {
 	const { name, price, imageUrl, quantity } = cartItem;
 
-	const reduceQuantity = () => {
-		console.log(quantity);
-	};
+	const { addItemToCart, removeItemFromCart, decreaseQuantityInCart } =
+		useContext(CartContext);
 
-	const increaseQuantity = () => {
-		console.log(quantity);
-	};
+	let itemPriceTotal = price * quantity;
+
+	const removeItemHandler = () => removeItemFromCart(cartItem);
+
+	const increaseQuantityHandler = () => addItemToCart(cartItem);
+
+	const decreaseQuantityHandler = () => decreaseQuantityInCart(cartItem);
 
 	return (
 		<div className='checkout-item-container'>
-			<img className='checkout-img' src={imageUrl} alt={name} />
+			<div className='image-container'>
+				<img className='checkout-img' src={imageUrl} alt={`${name}`} />
+			</div>
 			<span>{name}</span>
 			<div className='quantity-container'>
-				<span className='arrow' onClick={reduceQuantity}>
-					&lt;
+				<span className='arrow' onClick={decreaseQuantityHandler}>
+					&#10094;
 				</span>
 				<span className='quantity'>{quantity}</span>
-				<span className='arrow' onClick={increaseQuantity}>
-					&gt;
+				<span className='arrow' onClick={increaseQuantityHandler}>
+					&#10095;
 				</span>
 			</div>
-			<span>${price}</span>
-			<span className='close-button'>&#10005;</span>
+			<span>${itemPriceTotal}</span>
+			<span className='remove-button' onClick={removeItemHandler}>
+				&#10005;
+			</span>
 		</div>
 	);
 };

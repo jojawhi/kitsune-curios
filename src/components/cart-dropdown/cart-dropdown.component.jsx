@@ -1,12 +1,12 @@
 import './cart-dropdown.styles.scss';
 import { useContext } from 'react';
-import { DropdownContext } from '../../contexts/dropdown.context';
+import { CartContext } from '../../contexts/cart.context';
 import Button from '../button/button.component';
 import { Link } from 'react-router-dom';
 import CartItem from '../cart-item/cart-item.component';
 
 const CartDropdown = () => {
-	const { cartItems, setIsOpen } = useContext(DropdownContext);
+	const { cartItems, setIsOpen } = useContext(CartContext);
 
 	const closeDropdown = () => {
 		setIsOpen(false);
