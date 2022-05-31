@@ -1,15 +1,19 @@
-import { useState } from 'react';
-import FormInput from '../form-input/form-input.component';
-import Button from '../button/button.component';
-import {
-	signInAuthUserWithEmailAndPassword,
-	signInWithGooglePopup,
-} from '../../utils/firebase/firebase.utils';
 import {
 	SignInContainer,
 	SignInHeading,
 	ButtonsContainer,
 } from '../sign-in-form/sign-in-form.styles';
+
+import { useState } from 'react';
+
+import FormInput from '../form-input/form-input.component';
+
+import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
+
+import {
+	signInAuthUserWithEmailAndPassword,
+	signInWithGooglePopup,
+} from '../../utils/firebase/firebase.utils';
 
 const defaultFormFields = {
 	email: '',
@@ -96,7 +100,7 @@ const SignInForm = () => {
 					<Button type='submit'>Sign In</Button>
 					<Button
 						type='button'
-						buttonType='google'
+						buttonType={BUTTON_TYPE_CLASSES.google}
 						onClick={signInWithGoogle}
 					>
 						Google Sign In

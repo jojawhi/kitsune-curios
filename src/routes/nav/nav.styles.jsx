@@ -1,6 +1,8 @@
-import { Link } from 'react-router-dom';
-import { ReactComponent as FoxLogo } from '../../assets/logo.svg';
 import styled from 'styled-components';
+
+import { Link } from 'react-router-dom';
+
+import { ReactComponent as FoxLogo } from '../../assets/logo.svg';
 
 export const NavigationContainer = styled.div`
 	height: 7.5%;
