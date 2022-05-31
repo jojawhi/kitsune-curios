@@ -1,8 +1,8 @@
-import './nav.styles.scss';
+import { NavigationContainer, LogoContainer, NavLinksContainer, NavLink, Logo } from './nav.styles';
 //Fragment does not render, useful for satisfying single parent element return requirment
 import { Fragment, useContext } from 'react';
-import { Outlet, Link } from 'react-router-dom';
-import { ReactComponent as FoxLogo } from '../../assets/logo.svg';
+import { Outlet } from 'react-router-dom';
+
 import { UserContext } from '../../contexts/user.context';
 import { CartContext } from '../../contexts/cart.context';
 import { signOutUser } from '../../utils/firebase/firebase.utils';
@@ -19,34 +19,27 @@ const Nav = () => {
 
 	return (
 		<Fragment>
-			<div className='nav'>
-				<div className='logo-container'>
-					<Link to='/'>
-						<FoxLogo className='logo' />
-					</Link>
-				</div>
-				<div className='nav-links-container'>
-					<Link className='nav-link' to='/'>
-						HOME
-					</Link>
-					<Link className='nav-link' to='shop'>
-						SHOP
-					</Link>
+			<NavigationContainer>
+				<LogoContainer to='/'>
+					<Logo className='logo' />
+				</LogoContainer>
+
+				<NavLinksContainer>
+					<NavLink to='/'>HOME</NavLink>
+					<NavLink to='shop'>SHOP</NavLink>
 					{currentUser ? (
-						<span className='nav-link' onClick={signOutUser}>
+						<NavLink as='span' onClick={signOutUser}>
 							SIGN OUT
-						</span>
+						</NavLink>
 					) : (
-						<Link className='nav-link' to='auth'>
-							SIGN IN
-						</Link>
+						<NavLink to='auth'>SIGN IN</NavLink>
 					)}
 
 					<CartIcon />
-				</div>
-				{/* &&: short-circuit operator, evals as true with two truthy values, will return the last value  */}
+				</NavLinksContainer>
+				{/* &&: short-circuit operator, evals as true with two truthy values, will return the last value */}
 				{isOpen && <CartDropdown />}
-			</div>
+			</NavigationContainer>
 			<Outlet />
 		</Fragment>
 	);
