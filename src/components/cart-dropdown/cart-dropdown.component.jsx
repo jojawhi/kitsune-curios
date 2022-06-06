@@ -11,10 +11,10 @@ import { Link } from 'react-router-dom';
 import CartItem from '../cart-item/cart-item.component';
 
 const CartDropdown = () => {
-	const { cartItems, setIsOpen } = useContext(CartContext);
+	const { cartItems, setIsCartOpen } = useContext(CartContext);
 
 	const closeDropdown = () => {
-		setIsOpen(false);
+		setIsCartOpen(false);
 	};
 
 	return (
