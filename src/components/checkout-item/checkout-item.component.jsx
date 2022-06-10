@@ -6,22 +6,38 @@ import {
 	CheckoutImage,
 	CheckoutItemContainer,
 } from './checkout-item.styles';
-import { useContext } from 'react';
-import { CartContext } from '../../contexts/cart.context';
+
+// import { useContext } from 'react';
+
+// import { CartContext } from '../../contexts/cart.context';
+
+import { useDispatch, useSelector } from 'react-redux';
+
+import { selectCartItems } from '../../store/cart/cart.selector';
+
+import {
+	addItemToCart,
+	removeItemFromCart,
+	decreaseQuantityInCart,
+} from '../../store/cart/cart.action';
 
 const CheckoutItem = ({ cartItem }) => {
 	const { name, price, imageUrl, quantity } = cartItem;
 
-	const { addItemToCart, removeItemFromCart, decreaseQuantityInCart } =
-		useContext(CartContext);
+	const cartItems = useSelector(selectCartItems);
+
+	const dispatch = useDispatch();
+
+	// const { addItemToCart, removeItemFromCart, decreaseQuantityInCart } =
+	// 	useContext(CartContext);
 
 	let itemPriceTotal = price * quantity;
 
-	const removeItemHandler = () => removeItemFromCart(cartItem);
+	const removeItemHandler = () => dispatch(removeItemFromCart(cartItems, cartItem));
 
-	const increaseQuantityHandler = () => addItemToCart(cartItem);
+	const increaseQuantityHandler = () => dispatch(addItemToCart(cartItems, cartItem));
 
-	const decreaseQuantityHandler = () => decreaseQuantityInCart(cartItem);
+	const decreaseQuantityHandler = () => dispatch(decreaseQuantityInCart(cartItems, cartItem));
 
 	return (
 		<CheckoutItemContainer>

@@ -108,11 +108,15 @@ export const getCategoriesAndDocuments = async (category) => {
 
 	const querySnapshot = await getDocs(q);
 
-	const categoryMap = querySnapshot.docs.reduce((accumulator, docSnapshot) => {
-		const { title, items } = docSnapshot.data();
-		accumulator[title.toLowerCase()] = items;
-		return accumulator;
-	}, {});
+	return querySnapshot.docs.map((docSnapshot) => {
+		return docSnapshot.data();
+	});
 
-	return categoryMap;
+	// const categoryMap = querySnapshot.docs.reduce((accumulator, docSnapshot) => {
+	// 	const { title, items } = docSnapshot.data();
+	// 	accumulator[title.toLowerCase()] = items;
+	// 	return accumulator;
+	// }, {});
+
+	// return categoryMap;
 };
